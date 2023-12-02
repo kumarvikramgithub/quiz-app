@@ -7,12 +7,17 @@ const Question = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [selectedOptionBg, setSelectedOptionBg] = useState();
   const [isOptionsDisable, setIsOptionsDisable] = useState(false);
-  const { setStage, questions, setScore } = useContext(QuizStageContext);
+  const { setStage, questions, setScore} =
+    useContext(QuizStageContext);
   
   const chooseOption = (option)=>{
-    setSelectedOptionBg(() => `${questions[currentQuestionIndex].answer===option?'bg-teal-100 border-teal-100':'bg-red-100 border-red-100"'}`);
+    setSelectedOptionBg(() => `${questions[currentQuestionIndex].answer===option?'bg-teal-100 border-teal-100':'bg-red-300 border-red-100"'}`);
     if (questions[currentQuestionIndex].answer === option){
       setScore(myScore=>myScore+1);
+      questions[currentQuestionIndex].test.isCorrect = 1;
+      console.log(questions[currentQuestionIndex].test.isCorrect);
+    }else{
+      questions[currentQuestionIndex].test.isCorrect = -1;
     }
     setIsOptionsDisable(dissabled=> !dissabled);
     setSelectedOption(option);
@@ -29,7 +34,7 @@ const Question = () => {
 
   const changeQuestionFromListOfQuestion = (newQuestionIndex)=>{
     setCurrentQuestionIndex(newQuestionIndex);
-    setIsOptionsDisable((dissabled) => !dissabled);
+    setIsOptionsDisable((dissabled) => dissabled?!dissabled:dissabled);
     setSelectedOption("");
   }
   return (
@@ -160,23 +165,73 @@ const Question = () => {
         </div>
       </div>
       <div
-        className="bg-slate-200 ml-5 shadow-xl p-5 rounded flex-grow"
-        style={{ width: "300px" }}
+        className="bg-slate-200 ml-5 shadow-xl p-5 rounded "
+        style={{ width: "320px" }}
       >
-        {questions.map((q, questionIndex) => (
-          <button
-            className={`${
-              questionIndex === currentQuestionIndex
-                ? "bg-sky-500"
-                : "bg-slate-400"
-            } p-2 m-2 shadow-xl outline-2 rounded-md font-semibold`}
-            key={questionIndex}
-            onClick={() => changeQuestionFromListOfQuestion(questionIndex)}
-          >
-            {" "}
-            {`Q${questionIndex + 1}`}{" "}
-          </button>
-        ))}
+        <div className="border-b-2 border-solid border-slate-100 pb-5 mb-5">
+          {questions.map((q, questionIndex) => (
+            <button
+              className={`${
+                questionIndex === currentQuestionIndex
+                  ? "bg-sky-500"
+                  : "bg-slate-300"
+              } p-2 m-2 shadow-xl outline-2 rounded-md font-semibold`}
+              style={{ width: "40px", height: "40px" }}
+              key={questionIndex}
+              onClick={() => changeQuestionFromListOfQuestion(questionIndex)}
+            >
+              {" "}
+              {`Q${questionIndex + 1}`}{" "}
+            </button>
+          ))}
+        </div>
+        <div className="flex flex-wrap">
+          <div className="font-semibold tracking-wider">
+            <button
+              className="bg-slate-300 rounded p-2 m-2 font-semibold"
+              style={{ width: "40px", height: "40px" }}
+            >
+              Q
+            </button>{" "}
+            Not Attempt.
+          </div>
+          <div className="font-semibold tracking-wider">
+            <button
+              className="bg-sky-500 rounded p-2 m-2 font-semibold"
+              style={{ width: "40px", height: "40px" }}
+            >
+              Q
+            </button>{" "}
+            Current.
+          </div>
+          <div className="font-semibold tracking-wider">
+            <button
+              className="bg-amber-500 rounded p-2 m-2 font-semibold"
+              style={{ width: "40px", height: "40px" }}
+            >
+              Q
+            </button>{" "}
+            Skipped.
+          </div>
+          <div className="font-semibold tracking-wider">
+            <button
+              className="bg-teal-100 rounded p-2 m-2 font-semibold"
+              style={{ width: "40px", height: "40px" }}
+            >
+              Q
+            </button>{" "}
+            Correct.
+          </div>
+          <div className="font-semibold tracking-wider">
+            <button
+              className="bg-red-300 rounded p-2 m-2 font-semibold"
+              style={{ width: "40px", height: "40px" }}
+            >
+              Q
+            </button>{" "}
+            Incorrect.
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -14,6 +14,10 @@ export const QuizStageContextProvider = ({ children }) => {
         d: "Mat pucho na",
       },
       answer: "a",
+      test: {
+        isCorrect: 0,
+        isSkipped: false,
+      },
     },
     {
       question: "What is you name?",
@@ -24,6 +28,10 @@ export const QuizStageContextProvider = ({ children }) => {
         d: "None of these",
       },
       answer: "c",
+      test: {
+        isCorrect: 0,
+        isSkipped: false,
+      },
     },
     {
       question: "2+5 is ....",
@@ -34,11 +42,133 @@ export const QuizStageContextProvider = ({ children }) => {
         d: 7,
       },
       answer: "d",
+      test: {
+        isCorrect: 0,
+        isSkipped: false,
+      },
+    },
+    {
+      question: "Hey, how are you?",
+      options: {
+        a: "Fine",
+        b: "MindBloing",
+        c: "Bakwas",
+        d: "Mat pucho na",
+      },
+      answer: "a",
+      test: {
+        isCorrect: 0,
+        isSkipped: false,
+      },
+    },
+    {
+      question: "What is you name?",
+      options: {
+        a: "Rahul",
+        b: "Suresh",
+        c: "Mina",
+        d: "None of these",
+      },
+      answer: "c",
+      test: {
+        isCorrect: 0,
+        isSkipped: false,
+      },
+    },
+    {
+      question: "What is you name?",
+      options: {
+        a: "Rahul",
+        b: "Suresh",
+        c: "Mina",
+        d: "None of these",
+      },
+      answer: "c",
+      test: {
+        isCorrect: 0,
+        isSkipped: false,
+      },
+    },
+    {
+      question: "What is you name?",
+      options: {
+        a: "Rahul",
+        b: "Suresh",
+        c: "Mina",
+        d: "None of these",
+      },
+      answer: "c",
+      test: {
+        isCorrect: 0,
+        isSkipped: false,
+      },
+    },
+    {
+      question: "What is you name?",
+      options: {
+        a: "Rahul",
+        b: "Suresh",
+        c: "Mina",
+        d: "None of these",
+      },
+      answer: "c",
+      test: {
+        isCorrect: 0,
+        isSkipped: false,
+      },
+    },
+    {
+      question: "What is you name?",
+      options: {
+        a: "Rahul",
+        b: "Suresh",
+        c: "Mina",
+        d: "None of these",
+      },
+      answer: "c",
+      test: {
+        isCorrect: 0,
+        isSkipped: false,
+      },
+    },
+    {
+      question: "What is you name?",
+      options: {
+        a: "Rahul",
+        b: "Suresh",
+        c: "Mina",
+        d: "None of these",
+      },
+      answer: "c",
+      test: {
+        isCorrect: 0,
+        isSkipped: false,
+      },
+    },
+    {
+      question: "What is you name?",
+      options: {
+        a: "Rahul",
+        b: "Suresh",
+        c: "Mina",
+        d: "None of these",
+      },
+      answer: "c",
+      test: {
+        isCorrect: 0,
+        isSkipped: false,
+      },
     },
   ];
   return (
     <QuizStageContext.Provider
-      value={{ stage, setStage, questions, score, setScore }}
+      value={{
+        stage,
+        setStage,
+        questions,
+        score,
+        setScore
+      }}
     >
       {children}
     </QuizStageContext.Provider>
