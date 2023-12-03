@@ -6,160 +6,122 @@ export const QuizStageContextProvider = ({ children }) => {
   const [score, setScore] = useState(0);
   const questions = [
     {
-      question: "Hey, how are you?",
-      options: {
-        a: "Fine",
-        b: "MindBloing",
-        c: "Bakwas",
-        d: "Mat pucho na",
-      },
-      answer: "a",
-      test: {
-        isCorrect: 0,
-        isSkipped: false,
-      },
-    },
-    {
-      question: "What is you name?",
-      options: {
-        a: "Rahul",
-        b: "Suresh",
-        c: "Mina",
-        d: "None of these",
-      },
+      question: "What is the capital of France?",
+      options: { a: "Berlin", b: "Madrid", c: "Paris", d: "Rome" },
       answer: "c",
-      test: {
-        isCorrect: 0,
-        isSkipped: false,
-      },
+      test: { isCorrect: 0, option: "" },
     },
     {
-      question: "2+5 is ....",
+      question: "Which planet is known as the Red Planet?",
+      options: { a: "Earth", b: "Mars", c: "Jupiter", d: "Venus" },
+      answer: "b",
+      test: { isCorrect: 0, option: "" },
+    },
+    {
+      question: "Who wrote 'Romeo and Juliet'?",
       options: {
-        a: 17,
-        b: 10,
-        c: 6,
-        d: 7,
+        a: "Charles Dickens",
+        b: "William Shakespeare",
+        c: "Jane Austen",
+        d: "Mark Twain",
+      },
+      answer: "b",
+      test: { isCorrect: 0, option: "" },
+    },
+    {
+      question: "What is the largest mammal?",
+      options: {
+        a: "Elephant",
+        b: "Blue Whale",
+        c: "Giraffe",
+        d: "Hippopotamus",
+      },
+      answer: "b",
+      test: { isCorrect: 0, option: "" },
+    },
+    {
+      question: "Which programming language is often used for web development?",
+      options: { a: "Python", b: "Java", c: "JavaScript", d: "C++" },
+      answer: "c",
+      test: { isCorrect: 0, option: "" },
+    },
+    {
+      question: "What is the capital of Canada?",
+      options: { a: "Toronto", b: "Vancouver", c: "Ottawa", d: "Montreal" },
+      answer: "c",
+      test: { isCorrect: 0, option: "" },
+    },
+    {
+      question: "Which ocean is the largest?",
+      options: {
+        a: "Atlantic Ocean",
+        b: "Indian Ocean",
+        c: "Arctic Ocean",
+        d: "Pacific Ocean",
       },
       answer: "d",
-      test: {
-        isCorrect: 0,
-        isSkipped: false,
-      },
+      test: { isCorrect: 0, option: "" },
     },
     {
-      question: "Hey, how are you?",
+      question: "Who wrote 'To Kill a Mockingbird'?",
       options: {
-        a: "Fine",
-        b: "MindBloing",
-        c: "Bakwas",
-        d: "Mat pucho na",
+        a: "J.K. Rowling",
+        b: "Harper Lee",
+        c: "George Orwell",
+        d: "Ernest Hemingway",
       },
+      answer: "b",
+      test: { isCorrect: 0, option: "" },
+    },
+    {
+      question: "What is the largest planet in our solar system?",
+      options: { a: "Mars", b: "Jupiter", c: "Saturn", d: "Venus" },
+      answer: "b",
+      test: { isCorrect: 0, option: "" },
+    },
+    {
+      question: "In which year did the Titanic sink?",
+      options: { a: "1912", b: "1905", c: "1923", d: "1899" },
       answer: "a",
-      test: {
-        isCorrect: 0,
-        isSkipped: false,
-      },
+      test: { isCorrect: 0, option: "" },
     },
     {
-      question: "What is you name?",
-      options: {
-        a: "Rahul",
-        b: "Suresh",
-        c: "Mina",
-        d: "None of these",
-      },
+      question: "What is the capital of Japan?",
+      options: { a: "Beijing", b: "Seoul", c: "Tokyo", d: "Bangkok" },
       answer: "c",
-      test: {
-        isCorrect: 0,
-        isSkipped: false,
-      },
+      test: { isCorrect: 0, option: "" },
     },
     {
-      question: "What is you name?",
-      options: {
-        a: "Rahul",
-        b: "Suresh",
-        c: "Mina",
-        d: "None of these",
-      },
-      answer: "c",
-      test: {
-        isCorrect: 0,
-        isSkipped: false,
-      },
+      question: "Which country is known as the Land of the Rising Sun?",
+      options: { a: "China", b: "Japan", c: "Korea", d: "Thailand" },
+      answer: "b",
+      test: { isCorrect: 0, option: "" },
     },
     {
-      question: "What is you name?",
-      options: {
-        a: "Rahul",
-        b: "Suresh",
-        c: "Mina",
-        d: "None of these",
-      },
+      question: "What is the largest ocean on Earth?",
+      options: { a: "Atlantic", b: "Indian", c: "Pacific", d: "Arctic" },
       answer: "c",
-      test: {
-        isCorrect: 0,
-        isSkipped: false,
-      },
+      test: { isCorrect: 0, option: "" },
     },
     {
-      question: "What is you name?",
+      question: "Which gas do plants absorb from the atmosphere?",
       options: {
-        a: "Rahul",
-        b: "Suresh",
-        c: "Mina",
-        d: "None of these",
+        a: "Oxygen",
+        b: "Carbon Dioxide",
+        c: "Nitrogen",
+        d: "Hydrogen",
       },
-      answer: "c",
-      test: {
-        isCorrect: 0,
-        isSkipped: false,
-      },
+      answer: "b",
+      test: { isCorrect: 0, option: "" },
     },
     {
-      question: "What is you name?",
-      options: {
-        a: "Rahul",
-        b: "Suresh",
-        c: "Mina",
-        d: "None of these",
-      },
-      answer: "c",
-      test: {
-        isCorrect: 0,
-        isSkipped: false,
-      },
-    },
-    {
-      question: "What is you name?",
-      options: {
-        a: "Rahul",
-        b: "Suresh",
-        c: "Mina",
-        d: "None of these",
-      },
-      answer: "c",
-      test: {
-        isCorrect: 0,
-        isSkipped: false,
-      },
-    },
-    {
-      question: "What is you name?",
-      options: {
-        a: "Rahul",
-        b: "Suresh",
-        c: "Mina",
-        d: "None of these",
-      },
-      answer: "c",
-      test: {
-        isCorrect: 0,
-        isSkipped: false,
-      },
+      question: "In what year did the Titanic sink?",
+      options: { a: "1905", b: "1912", c: "1920", d: "1931" },
+      answer: "b",
+      test: { isCorrect: 0, option: "" },
     },
   ];
+
   return (
     <QuizStageContext.Provider
       value={{

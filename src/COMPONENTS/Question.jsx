@@ -9,40 +9,66 @@ const Question = () => {
   const [isOptionsDisable, setIsOptionsDisable] = useState(false);
   const { setStage, questions, setScore} =
     useContext(QuizStageContext);
+  const [test, setTest] = useState(questions);
   
   const chooseOption = (option)=>{
-    setSelectedOptionBg(() => `${questions[currentQuestionIndex].answer===option?'bg-teal-100 border-teal-100':'bg-red-300 border-red-100"'}`);
-    if (questions[currentQuestionIndex].answer === option){
-      setScore(myScore=>myScore+1);
-      questions[currentQuestionIndex].test.isCorrect = 1;
-      console.log(questions[currentQuestionIndex].test.isCorrect);
-    }else{
-      questions[currentQuestionIndex].test.isCorrect = -1;
+    if (
+      (test[currentQuestionIndex].answer === option
+    )) {
+      setSelectedOptionBg(() => 'bg-teal-200 border-teal-100');
+      setScore((myScore) => myScore + 1);
+      questionBgInPannel(1, option);
+    } else {
+      setSelectedOptionBg(() => 'bg-red-100 border-red-100');
+      questionBgInPannel(-1, option);
     }
     setIsOptionsDisable(dissabled=> !dissabled);
     setSelectedOption(option);
   }
   const nextQuestion = () =>{
-    if (currentQuestionIndex === questions.length-1){
+    if (currentQuestionIndex === test.length-1){
       setStage("result");
     }else{
+      isSolvedQuestion(currentQuestionIndex+1);
       setCurrentQuestionIndex((index) => index + 1);
     }
-    setIsOptionsDisable((dissabled) => !dissabled);
-    setSelectedOption('');
   }
 
+  const questionBgInPannel = (value, option='') => {
+    if (
+      test[currentQuestionIndex].test.isCorrect === 0 ||
+      test[currentQuestionIndex].test.isCorrect === 2
+    ) {
+      test[currentQuestionIndex].test.isCorrect = value;
+    }
+    test[currentQuestionIndex].test.option = option;
+    setTest((test) => test);
+  };
+
+  const isSolvedQuestion = (newQuestionIndex)=>{
+    if (
+      test[newQuestionIndex].test.isCorrect === 1 ||
+      test[newQuestionIndex].test.isCorrect === -1
+    ) {
+      setIsOptionsDisable(true);
+      setSelectedOption(test[newQuestionIndex].test.option);
+    } else {
+      setIsOptionsDisable((dissabled) => (dissabled ? !dissabled : dissabled));
+      setSelectedOption("");
+    }
+  };
+
   const changeQuestionFromListOfQuestion = (newQuestionIndex)=>{
+    questionBgInPannel(2)
     setCurrentQuestionIndex(newQuestionIndex);
-    setIsOptionsDisable((dissabled) => dissabled?!dissabled:dissabled);
-    setSelectedOption("");
+    isSolvedQuestion(newQuestionIndex);
   }
   return (
     <div className="flex justify-end">
       <div className="bg-slate-300 p-5 shadow rounded flex-grow">
         <h3 className="text-2xl font-semibold tracking-wide italic">
           {`Q${currentQuestionIndex + 1}.`}{" "}
-          {questions[currentQuestionIndex].question}
+          {test[currentQuestionIndex].question}
         </h3>
         <div className="m-5 flex flex-col items-start">
           <button
@@ -53,17 +79,15 @@ const Question = () => {
             }    rounded-md ${
               selectedOption === "a"
                 ? selectedOptionBg
-                : questions[currentQuestionIndex].answer === "a" &&
-                  isOptionsDisable
-                ? "bg-teal-100 border-teal-100"
+                : test[currentQuestionIndex].answer === "a" && isOptionsDisable
+                ? "bg-teal-200 border-teal-100"
                 : ""
             } `}
             onClick={() => chooseOption("a")}
             disabled={isOptionsDisable}
           >
-            A. {questions[currentQuestionIndex].options.a}
-            {questions[currentQuestionIndex].answer === "a" &&
-            isOptionsDisable ? (
+            A. {test[currentQuestionIndex].options.a}
+            {test[currentQuestionIndex].answer === "a" && isOptionsDisable ? (
               <Icon icon="icon-park-solid:correct" color="lime" />
             ) : selectedOption === "a" ? (
               <Icon icon="octicon:x-12" color="red" />
@@ -79,17 +103,15 @@ const Question = () => {
             }    rounded-md ${
               selectedOption === "b"
                 ? selectedOptionBg
-                : questions[currentQuestionIndex].answer === "b" &&
-                  isOptionsDisable
-                ? "bg-teal-100 border-teal-100"
+                : test[currentQuestionIndex].answer === "b" && isOptionsDisable
+                ? "bg-teal-200 border-teal-100"
                 : ""
             } `}
             onClick={() => chooseOption("b")}
             disabled={isOptionsDisable}
           >
-            B. {questions[currentQuestionIndex].options.b}
-            {questions[currentQuestionIndex].answer === "b" &&
-            isOptionsDisable ? (
+            B. {test[currentQuestionIndex].options.b}
+            {test[currentQuestionIndex].answer === "b" && isOptionsDisable ? (
               <Icon icon="icon-park-solid:correct" color="lime" />
             ) : selectedOption === "b" ? (
               <Icon icon="octicon:x-12" color="red" />
@@ -105,17 +127,15 @@ const Question = () => {
             }    rounded-md ${
               selectedOption === "c"
                 ? selectedOptionBg
-                : questions[currentQuestionIndex].answer === "c" &&
-                  isOptionsDisable
-                ? "bg-teal-100 border-teal-100"
+                : test[currentQuestionIndex].answer === "c" && isOptionsDisable
+                ? "bg-teal-200 border-teal-100"
                 : ""
             } `}
             onClick={() => chooseOption("c")}
             disabled={isOptionsDisable}
           >
-            C. {questions[currentQuestionIndex].options.c}
-            {questions[currentQuestionIndex].answer === "c" &&
-            isOptionsDisable ? (
+            C. {test[currentQuestionIndex].options.c}
+            {test[currentQuestionIndex].answer === "c" && isOptionsDisable ? (
               <Icon icon="icon-park-solid:correct" color="lime" />
             ) : selectedOption === "c" ? (
               <Icon icon="octicon:x-12" color="red" />
@@ -131,17 +151,15 @@ const Question = () => {
             }    rounded-md ${
               selectedOption === "d"
                 ? selectedOptionBg
-                : questions[currentQuestionIndex].answer === "d" &&
-                  isOptionsDisable
-                ? "bg-teal-100 border-teal-100"
+                : test[currentQuestionIndex].answer === "d" && isOptionsDisable
+                ? "bg-teal-200 border-teal-100"
                 : ""
             } `}
             onClick={() => chooseOption("d")}
             disabled={isOptionsDisable}
           >
-            A. {questions[currentQuestionIndex].options.d}
-            {questions[currentQuestionIndex].answer === "d" &&
-            isOptionsDisable ? (
+            A. {test[currentQuestionIndex].options.d}
+            {test[currentQuestionIndex].answer === "d" && isOptionsDisable ? (
               <Icon icon="icon-park-solid:correct" color="lime" />
             ) : selectedOption === "d" ? (
               <Icon icon="octicon:x-12" color="red" />
@@ -153,32 +171,42 @@ const Question = () => {
         <div className=" flex justify-end mr-5">
           <button
             className={`${
-              isOptionsDisable ? "bg-sky-500" : "bg-slate-400"
+              isOptionsDisable ? "bg-green-600" : "bg-slate-400"
             } p-2 mt-3 text-slate-100 font-semibold rounded-lg`}
             disabled={!isOptionsDisable}
             onClick={nextQuestion}
           >
-            {currentQuestionIndex === questions.length - 1
+            {currentQuestionIndex === test.length - 1
               ? "Finish Quiz"
               : "Continue"}
           </button>
         </div>
       </div>
       <div
-        className="bg-slate-200 ml-5 shadow-xl p-5 rounded "
+        className="bg-slate-200 ml-5 shadow-xl p-5 rounded"
         style={{ width: "320px" }}
       >
         <div className="border-b-2 border-solid border-slate-100 pb-5 mb-5">
-          {questions.map((q, questionIndex) => (
+          {test.map((q, questionIndex) => (
             <button
               className={`${
-                questionIndex === currentQuestionIndex
-                  ? "bg-sky-500"
+                test[questionIndex].test.isCorrect === 1
+                  ? "bg-teal-200"
+                  : test[questionIndex].test.isCorrect === -1
+                  ? "bg-red-300"
+                  : test[questionIndex].test.isCorrect === 2
+                  ? "bg-amber-500"
+                  : questionIndex === currentQuestionIndex
+                  ? "bg-green-600"
                   : "bg-slate-300"
               } p-2 m-2 shadow-xl outline-2 rounded-md font-semibold`}
               style={{ width: "40px", height: "40px" }}
               key={questionIndex}
               onClick={() => changeQuestionFromListOfQuestion(questionIndex)}
+              disabled={
+                test[questionIndex].test.isCorrect === 1 ||
+                test[questionIndex].test.isCorrect === -1
+              }
             >
               {" "}
               {`Q${questionIndex + 1}`}{" "}
@@ -197,7 +225,7 @@ const Question = () => {
           </div>
           <div className="font-semibold tracking-wider">
             <button
-              className="bg-sky-500 rounded p-2 m-2 font-semibold"
+              className="bg-green-600 rounded p-2 m-2 font-semibold"
               style={{ width: "40px", height: "40px" }}
             >
               Q
@@ -215,7 +243,7 @@ const Question = () => {
           </div>
           <div className="font-semibold tracking-wider">
             <button
-              className="bg-teal-100 rounded p-2 m-2 font-semibold"
+              className="bg-teal-200 rounded p-2 m-2 font-semibold"
               style={{ width: "40px", height: "40px" }}
             >
               Q
